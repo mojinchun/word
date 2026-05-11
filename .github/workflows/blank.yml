@@ -1,0 +1,36 @@
+# 这是一个帮助您入门操作的基本工作流
+
+name: CI
+
+# 控制工作流的运行时间
+在:
+  # 在推送或拉取请求事件时触发工作流，但仅针对“main”分支
+推送:
+分支: [ "main" ]
+拉取请求:
+分支: [ "main" ]
+
+  # 允许您从“操作”选项卡手动运行此工作流
+ 工作流调度:
+
+# 一个工作流运行由一个或多个作业组成，这些作业可以按顺序或并行运行
+jobs:
+  # 此工作流包含一个名为“构建”的单个作业
+  build:
+    # 作业将在哪种类型的运行器上运行
+    runs-on: ubuntu-latest
+
+    # 步骤代表将作为作业一部分执行的一系列任务
+    steps:
+      # 在$GITHUB_WORKSPACE下检出您的仓库，以便您的作业可以访问它
+      - 使用: actions/checkout@v4
+
+      # 使用运行器 shell 运行单个命令
+      - 名称: 运行一行脚本
+：echo 你好，世界！
+
+      # 使用运行器 shell 运行一组命令
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
